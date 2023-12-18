@@ -44,13 +44,13 @@ C_O_existed_poscar_nnlist_path_list = [str(p) + add_str for p in C_O_existed_pos
 pp = Pool(cpu_count() - 1)
 total = len(C_O_existed_poscar_nnlist_path_list)
 try:
-    bool_ion_contain = list(tqdm(pp.imap(wrap_nnlist2df_and_concat_filter, C_O_existed_poscar_nnlist_path_list[0:50]), total=total))
+    bool_ion_contain = list(tqdm(pp.imap(wrap_nnlist2df_and_concat_filter, C_O_existed_poscar_nnlist_path_list), total=total))
 finally:
     pp.close()
     pp.join()
 
 # apply filter(:bool_ion_contain) to C_O_existed_poscar_nnlist_path_list
-ion_contained_poscar_nnlist_path_list = np.array(C_O_existed_poscar_nnlist_path_list[0:50])[bool_ion_contain]
+ion_contained_poscar_nnlist_path_list = np.array(C_O_existed_poscar_nnlist_path_list)[bool_ion_contain]
 # get ion contained folder path list
 ion_contained_poscar_folder_path_list = [Path(os.path.split(Path(os.path.split(Path(p))[0]))[0]) for p in ion_contained_poscar_nnlist_path_list]
 # save ion contained folder path list as .npy
