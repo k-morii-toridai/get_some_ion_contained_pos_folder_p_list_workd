@@ -3,7 +3,7 @@ import numpy as np
 
 def filter_2(df_nnlist):
     """
-    2．POSCAR.nnlistにおいて，原子Cから0-2．のCO結合距離以内に，原子Oを3つ以上含む，中心原子Cが存在するかどうか判定．
+    2．POSCAR.nnlistにおいて，原子Pから0-2．のPH結合距離以内に，原子Hを4つ以上含む，中心原子Pが存在するかどうか判定．
     → 存在する場合、True値，{中心原子Cの'central_atom_id': そのneighborsの'central_atom_id'}の辞書の2つを返す．
     → 存在しない場合，False値，空の辞書を返す．
 
@@ -24,11 +24,13 @@ def filter_2(df_nnlist):
     df_nnlist_central_atom_ids = np.array(list(df_nnlist_group_dict.keys()))
     bool_list = []
     for key in df_nnlist_central_atom_ids:
-        bool_list.append(df_nnlist.iloc[df_nnlist_group_dict[key]]['neighboring_atom_symbol'].tolist().count('O') >= 3)
+        bool_sort_dist_list = df_nnlist.iloc[df_nnlist_group_dict[key]].sort_values('rel_distance')['rel_distance'] < 1.9
+        # bool_list.append(df_nnlist.iloc[df_nnlist_group_dict[key]].sort_values('rel_distance')[bool_sort_dist]['neighboring_atom_symbol'].tolist().count('H') >= 4)
+        bool_list.append(df_nnlist.iloc[df_nnlist_group_dict[key]].sort_values('rel_distance')[bool_sort_dist_list]['neighboring_atom_symbol'].tolist().count('O') == 3)
     df_nnlist_central_atom_ids_fillterd = df_nnlist_central_atom_ids[bool_list]
     bool_filter_2 = len(df_nnlist_central_atom_ids_fillterd) >= 1
     filtered_df_nnlist_group_dict = {key: df_nnlist_group_dict[key] for key in df_nnlist_group_dict.keys() if key in df_nnlist_central_atom_ids_fillterd}
-
+    
     return bool_filter_2, filtered_df_nnlist_group_dict
 
 

@@ -37,7 +37,8 @@ print(f'os.path.exists(target_npy_p): {os.path.exists(target_npy_p)}')
 
 some_species_existed_poscar_folder_path_list = np.load(target_npy_p, allow_pickle=True)
 print(f"len(some_species_existed_poscar_folder_path_list): {len(some_species_existed_poscar_folder_path_list)}")
-some_species_existed_poscar_folder_path_list = some_species_existed_poscar_folder_path_list[0:100]
+# テスト用
+# some_species_existed_poscar_folder_path_list = some_species_existed_poscar_folder_path_list[0:100]
 
 
 def nnlist2df_and_concat_filter(nnlist_path, central_atom_symbol, neighboring_atom_symbol, bond_length_lower_end, bond_length_upper_end):

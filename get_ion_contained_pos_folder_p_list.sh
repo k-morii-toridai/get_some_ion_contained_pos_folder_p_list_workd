@@ -1,0 +1,9 @@
+# time python3 get_CO3_contained_pos_folder_p_list.py
+time python3 get_IO3_contained_pos_folder_p_list.py
+time python3 get_NO2_contained_pos_folder_p_list.py
+time python3 get_NO3_contained_pos_folder_p_list.py
+time python3 get_MnO4_contained_pos_folder_p_list.py
+time python3 get_PtF6_contained_pos_folder_p_list.py
+time python3 get_PtCl6_contained_pos_folder_p_list.py
+time python3 get_PtBr6_contained_pos_folder_p_list.py
+time python3 get_PtI6_contained_pos_folder_p_list.py
